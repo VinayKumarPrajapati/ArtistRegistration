@@ -54,6 +54,13 @@ artistSchema.virtual('password')
     })
 
  artistSchema.methods = {
+
+    authenticate: function(plainText){
+
+        return this.encryptPassword(plainText) === this.hash_password;
+
+    },
+
     encryptPassword: function(password){
         if(!password) return '';
         try{
