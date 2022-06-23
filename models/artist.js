@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const uuidV1 = require('uuid');
+const { v1: uuidv1 } = require('uuid');
+
+
 
 const artistSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
         required: true,
-        maxlength: 64
+        // maxlength: 64
     },
     email: {
         type: String,
         trim: true,
         required: true,
-        unique: 64
+        // unique: 64
     },
     hash_password: {
         type: String,
@@ -44,8 +46,8 @@ const artistSchema = new mongoose.Schema({
 artistSchema.virtual('password')
     .set(function(password){
         this._password = password
-        this.salt = uuidV1()
-        this.password = this.encryptPassword(password)
+        this.salt = uuidv1() 
+        this.hash_password = this.encryptPassword(password)
     })
     .get(function(){
         return this._password
