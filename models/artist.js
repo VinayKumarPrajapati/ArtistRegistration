@@ -1,4 +1,4 @@
-const mongoose = requrie('mongoose');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 const uuidV1 = require('uuid');
 
@@ -15,21 +15,21 @@ const artistSchema = new mongoose.Schema({
         required: true,
         unique: 64
     },
-    password: {
+    hash_password: {
         type: String,
         required: true,
     },
     artistType:{
         type: String,
-        required: true,
+        // required: true,
     },
     about: {
         type: String,
         trim: true,
-        required: true
+        // required: true
     },
     usertype:{
-        type: Number,
+        type: Number, 
         default: 0
     },
     history:{
