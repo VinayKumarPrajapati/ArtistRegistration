@@ -7,7 +7,7 @@ const expressValidator = require('express-validator');
 
 require('dotenv').config();
 
-const artistRoutes = require('./routes/artist');
+const authRoutes = require('./routes/auth');
 
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
 
-app.use("/api", artistRoutes); 
+app.use("/api", authRoutes); 
 
 const port = process.env.PORT || 8000;
 
