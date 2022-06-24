@@ -1,6 +1,6 @@
 const Artist = require('../models/artist');
 const jwt = require('jsonwebtoken');
-const { expressJwt } = require('express-jwt');
+const expressJwt = require('express-jwt');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.register = (req, res) => {
@@ -21,16 +21,12 @@ exports.register = (req, res) => {
     });
 };
 
-
-
-
-
 exports.login  = (req, res) => {
     const {email, password} = req.body;
     Artist.findOne({email},(err, artist) => {
         if(err || !artist){
             return res.status(400).json({
-                err: 'User with this email does not exists Please Register'
+                err: 'Artist with this email does not exists Please Register'
             });
         }
 
@@ -40,9 +36,7 @@ exports.login  = (req, res) => {
             });
         }   
 
-        
-
-        const token = jwt.sign({_id: artist._id}, process.env.JWT_SECRET);
+        const token = jwt.sign({_id: artist.id}, process.env.JWT_SECRET);
 
         res.cookie('t', token, { expire: new Date() + 9999 } );
 
@@ -52,7 +46,7 @@ exports.login  = (req, res) => {
 
 
     });
-}
+};
 
 exports.signout = (req, res) => {
     res.clearCookie('t');

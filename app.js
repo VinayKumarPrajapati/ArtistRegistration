@@ -8,7 +8,7 @@ const expressValidator = require('express-validator');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
-
+const artistRoutes = require('./routes/auth');
 
 const app = express();
 
